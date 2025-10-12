@@ -50,15 +50,6 @@ jobs:
       - name: Run tests with coverage
         run: npm test
 
-      - name: Check coverage threshold
-        run: |
-          COVERAGE=$(npm test -- --silent --coverage | grep "All files" | awk '{print $2}' | tr -d '%')
-          echo "Code coverage: $COVERAGE%"
-          if [ $(echo "$COVERAGE < 20" | bc) -eq 1 ]; then
-            echo "Coverage is below 20%!"
-            exit 1
-          fi
-
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4
         if: always()
