@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Serviço da aplicação Node.js
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fiap-api-node
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/fiap-blog
+      - API_VERSION=v1
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - fiap-network
+    volumes:
+      - ./logs:/app/logs
+
+  # Serviço do MongoDB
+  mongodb:
+    image: mongo:7.0
+    container_name: fiap-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=fiap-blog
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - fiap-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+# Volumes para persistência de dados
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+
+# Rede personalizada
+networks:
+  fiap-network:
+    driver: bridge
