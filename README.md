@@ -103,9 +103,31 @@ Resposta esperada:
 {
   "success": true,
   "message": "API está funcionando!",
-  "timestamp": "2025-10-12T..."
+  "timestamp": "2025-10-14T..."
 }
 ```
+
+## Documentação Interativa (Swagger)
+
+A API possui documentação interativa completa via Swagger UI.
+
+**Acesse:** http://localhost:3000/swagger
+
+### Como usar o Swagger
+
+1. Abra http://localhost:3000/swagger no navegador
+2. Navegue pelos endpoints disponíveis
+3. Clique em "Try it out" para testar qualquer endpoint
+4. Preencha os parâmetros necessários
+5. Execute a requisição e veja a resposta em tempo real
+
+### Vantagens do Swagger
+
+- Interface visual e intuitiva
+- Testa endpoints sem precisar de Postman ou cURL
+- Documentação sempre atualizada
+- Exemplos de request/response
+- Validações em tempo real
 
 ## Documentação da API
 
