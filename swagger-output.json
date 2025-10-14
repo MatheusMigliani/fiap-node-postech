@@ -1,0 +1,327 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Blogging Educacional - FIAP",
+    "version": "1.0.0",
+    "description": "API REST para plataforma de blogging educacional para professores da rede pública",
+    "contact": {
+      "name": "FIAP - Pós Tech",
+      "email": "matheusmigliani@yahoo.com.br"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Posts",
+      "description": "Endpoints para gerenciamento de posts educacionais"
+    },
+    {
+      "name": "Health",
+      "description": "Verificação de saúde da API"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/posts/search": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/posts/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "content": {
+                  "example": "any"
+                },
+                "author": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "content": {
+                  "example": "any"
+                },
+                "author": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Post": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Introdução à Matemática"
+        },
+        "content": {
+          "type": "string",
+          "example": "Conteúdo completo da aula sobre matemática básica..."
+        },
+        "author": {
+          "type": "string",
+          "example": "Prof. João Silva"
+        }
+      }
+    },
+    "PostResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "507f1f77bcf86cd799439011"
+            },
+            "title": {
+              "type": "string",
+              "example": "Introdução à Matemática"
+            },
+            "content": {
+              "type": "string",
+              "example": "Conteúdo completo da aula..."
+            },
+            "author": {
+              "type": "string",
+              "example": "Prof. João Silva"
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2025-10-14T00:00:00.000Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2025-10-14T00:00:00.000Z"
+            }
+          }
+        }
+      }
+    },
+    "PostList": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "count": {
+          "type": "number",
+          "example": 2
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "507f1f77bcf86cd799439011"
+              },
+              "title": {
+                "type": "string",
+                "example": "Introdução à Matemática"
+              },
+              "author": {
+                "type": "string",
+                "example": "Prof. João Silva"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2025-10-14T00:00:00.000Z"
+              },
+              "excerpt": {
+                "type": "string",
+                "example": "Primeiros 100 caracteres..."
+              }
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Mensagem de erro"
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Erro de validação"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "example": "title"
+              },
+              "message": {
+                "type": "string",
+                "example": "O título é obrigatório"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -39,3 +39,4 @@ build/
 # Misc
 *.tmp
 *.temp
+test-posts.json

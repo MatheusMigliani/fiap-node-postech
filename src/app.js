@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger-output.json');
 const config = require('./config/environment');
 const connectDatabase = require('./config/database');
 const postRoutes = require('./routes/postRoutes');
@@ -37,9 +39,16 @@ app.get('/', (_req, res) => {
     endpoints: {
       posts: '/posts',
       health: '/health',
+      docs: '/swagger',
     },
   });
 });
+
+// Swagger Documentation
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'API Blogging Educacional - FIAP',
+}));
 
 // Rotas da API
 app.use('/posts', postRoutes);
